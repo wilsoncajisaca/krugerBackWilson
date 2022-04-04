@@ -38,5 +38,11 @@ spring:
   jmx:
     default-domain: entities
 
+#jwt properties
+jwt:
+  signing-key: cp/Apx6S6fFEc6sC65nxWg==
+  token-prefix: Bearer
+  header-string: Authorization
+
 server:
   port: 8090
