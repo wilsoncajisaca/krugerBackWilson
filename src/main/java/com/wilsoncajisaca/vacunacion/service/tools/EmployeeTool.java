@@ -38,7 +38,7 @@ public class EmployeeTool extends Tools {
 
         if(employeeINP.getPhones() != null){
             mobilePhones = employeeINP.getPhones().stream()
-                    .peek(e -> e.setEmployee(employeeINP.getEmployeeId()))
+                    .peek(e -> e.setEmployee(employee.getId()))
                     .map(EmployeePhoneMapper::toEntity).collect(Collectors.toSet());
         }
 
@@ -67,7 +67,7 @@ public class EmployeeTool extends Tools {
 
         if(employeeINP.getAddresses() != null){
             addresses = employeeINP.getAddresses().stream()
-                    .peek(e -> e.setEmployee(employeeINP.getEmployeeId()))
+                    .peek(e -> e.setEmployee(employee.getId()))
                     .map(EmployeeAddressMapper::toEntity).collect(Collectors.toSet());
         }
 
@@ -98,7 +98,7 @@ public class EmployeeTool extends Tools {
 
         if(employeeINP.getVaccinationEmployees() != null){
             vaccinationEmployees = employeeINP.getVaccinationEmployees().stream()
-                    .peek(e -> e.setEmployee(employeeINP.getEmployeeId()))
+                    .peek(e -> e.setEmployee(employee.getId()))
                     .map(EmployeeVaccinationMapper::toEntity).collect(Collectors.toSet());
         }
 
