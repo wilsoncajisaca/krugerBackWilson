@@ -10,3 +10,11 @@ Ir al directorio EXTRAS y correr los scripts.
 
 En el directorio EXTRAS tambien encontrará adjunto el modelado de la base.
 
+El sistema ya cuenta con un usuario ADMINISTRADOR mismo que se ingreso anteriormente este usuario corresponde a
+username = 0123456789 
+password = 12345
+
+Los usuarios de tipo empleado solo se crean atraves de la aplicacion.
+
+Para mayor información puede consultar la documentacion en swagger
+link: localhost:8090/swagger-ui.html
