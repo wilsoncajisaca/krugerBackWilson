@@ -1,0 +1,37 @@
+-- Database: kruger-db
+
+-- DROP DATABASE IF EXISTS "kruger-db";
+
+CREATE DATABASE "kruger-db"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Spanish_Spain.1252'
+    LC_CTYPE = 'Spanish_Spain.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+
+-- Role: kruger
+-- DROP ROLE IF EXISTS kruger;
+
+CREATE ROLE kruger WITH
+  LOGIN
+  SUPERUSER
+  INHERIT
+  CREATEDB
+  CREATEROLE
+  NOREPLICATION
+  ENCRYPTED PASSWORD 'md56bfd5568f82dfd77def748202dbbe796';
+
+INSERT INTO public.roles (id, description, "name", status) VALUES(1, 'ADMIN', 'ROLE_ADMIN', true);
+INSERT INTO public.roles (id, description, "name", status) VALUES(2, 'USER', 'ROLE_USER', true);
+
+INSERT INTO public.employee (id, created_by, created_on, updated_by, updated_on, birth_date, email, identification, names, second_surname, status, surname, vaccination_status) VALUES(1, '', '2000-01-01 00:00:00.000', NULL, '2000-01-01 00:00:00.000', '2000-01-01', 'admin@gmail.com', '0123456789', 'ADMIN', '', true, 'ADMIN', 'Y');
+INSERT INTO public.employee (id, created_by, created_on, updated_by, updated_on, birth_date, email, identification, names, second_surname, status, surname, vaccination_status) VALUES(2, '', '2000-01-01 00:00:00.000', NULL, '2000-01-01 00:00:00.000', '1994-01-01', 'admin@gmail.com', '0106146137', 'WILSON', 'VILLA', true, 'CAJISACA', 'Y');
+
+INSERT INTO public.auth_employee (id, created_by, created_on, updated_by, updated_on, id_employee, "password", status, username) VALUES(1, '', '2022-01-01 00:00:00.000', '', '2022-01-01 00:00:00.000', 1, '$2a$10$6/Tt/iJQHnGslc86uYdWo.KlqHWWDMoCG88iyzk41xOd.tPZNa456', true, '0123456789');
+INSERT INTO public.auth_employee (id, created_by, created_on, updated_by, updated_on, id_employee, "password", status, username) VALUES(2, '', '2022-01-01 00:00:00.000', '', '2022-01-01 00:00:00.000', 2, '$2a$10$6/Tt/iJQHnGslc86uYdWo.KlqHWWDMoCG88iyzk41xOd.tPZNa456', true, '0106146137');
+
+INSERT INTO public.auth_role (auth_id, rol_id) VALUES(1, 1);
+INSERT INTO public.auth_role (auth_id, rol_id) VALUES(2, 2);
