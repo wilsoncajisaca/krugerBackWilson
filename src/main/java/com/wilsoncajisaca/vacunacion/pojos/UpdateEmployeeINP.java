@@ -29,8 +29,6 @@ public class UpdateEmployeeINP implements Serializable {
     @With
     private Long employeeId;
 
-    @NotEmpty(message = "No se encontro el nombre de usuario")
-    @JsonProperty("username")
     @With
     private String username;
 

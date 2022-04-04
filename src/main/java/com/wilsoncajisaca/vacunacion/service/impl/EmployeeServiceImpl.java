@@ -146,7 +146,7 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
     }
 
     private Employee updateCompleteDataEmployee (UpdateEmployeeINP employeeINP) {
-        Employee employee = getEmployeeById(employeeINP.getEmployeeId());
+        Employee employee = getEmployeeByIdentification(employeeINP.getUsername());
         employee.setBirthDate(employeeINP.getBirthDate());
         employee.setVaccinationStatus(employeeINP.getVaccinationStatus() ? VaccinationStatus.Y : VaccinationStatus.N);
         employee.setMobilePhones(createEmployeePhone(employee, employeeINP));
@@ -164,6 +164,9 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
                 .orElseThrow(this::generateErrorNotFoundEmployee);
     }
 
-
+    private Employee getEmployeeByIdentification(String identifier){
+        return employeeRepository.findByIdentificationAndStatus(identifier,true)
+                .orElseThrow(this::generateErrorNotFoundEmployee);
+    }
 
 }

@@ -122,7 +122,7 @@ public class EmployeeController {
      * Update data of an employee
      *
      * @param employeeINP Data Employee for update
-     * @return the {@link ResponseEntity} with status {@code 202 (OK)} and with body of an employee
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body of an employee
      */
     @Operation(summary = "Permite actualizar la informacion del empleado por el mismo empleado")
     @PutMapping(value = "update-complete-information", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
