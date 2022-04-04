@@ -24,16 +24,12 @@ public class UserService implements UserDetailsService {
     @Autowired
     private AuthRepository authRepository;
 
-    @Autowired
-    private RolesRepository rolesRepository;
-
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Auth auth = authRepository.findByUsernameAndStatus(userName, true)
-                .orElseThrow(() -> new GeneralException(new ApiError("Usuario y/o Contraseña Incorrecto")));
-
-        UserDetails userDetails = new User(auth.getUsername(),auth.getPassword(), mappedRole(auth.getRoles()));
-        return userDetails;
+                .orElseThrow(() -> new GeneralException(new ApiError("Usuario y/o Contraseña es incorrecto")));
+        
+        return new User(auth.getUsername(), auth.getPassword(), mappedRole(auth.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mappedRole(Set<Role> roles){

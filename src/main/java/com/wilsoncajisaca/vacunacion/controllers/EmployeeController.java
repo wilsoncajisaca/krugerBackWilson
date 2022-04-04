@@ -6,6 +6,7 @@ import com.wilsoncajisaca.vacunacion.exception.GeneralException;
 import com.wilsoncajisaca.vacunacion.pojos.UpdateEmployeeINP;
 import com.wilsoncajisaca.vacunacion.pojos.errors.ApiError;
 import com.wilsoncajisaca.vacunacion.pojos.RegisterEmployeeINP;
+import com.wilsoncajisaca.vacunacion.security.JwtTokenProvider;
 import com.wilsoncajisaca.vacunacion.service.EmployeeService;
 import com.wilsoncajisaca.vacunacion.utils.Validations;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,10 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,6 +36,9 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @GetMapping(value = "test", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<Object> test() {
@@ -100,6 +109,14 @@ public class EmployeeController {
         return ResponseEntity.ok().body(response);
     }
 
+    @Operation(summary = "Permite visualizar la informacion del empleado")
+    @GetMapping(value = "get-complete-information", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> getInfoByEmployee(Principal principal) throws Exception {
+        log.debug("REST request get info of an employee : {}", principal);
+        Employee employee = employeeService.getInfoByEmployee(principal.getName());
+        return ResponseEntity.ok().body(employee);
+    }
+
     /**
      * {@code PUT  /update} : update an employee
      * Update data of an employee
@@ -109,7 +126,8 @@ public class EmployeeController {
      */
     @Operation(summary = "Permite actualizar la informacion del empleado por el mismo empleado")
     @PutMapping(value = "update-complete-information", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updateCompleteEmployee(@Valid @RequestBody UpdateEmployeeINP employeeINP, Errors errors) throws Exception {
+    public ResponseEntity<Object> updateCompleteEmployee(@Valid @RequestBody UpdateEmployeeINP employeeINP, Principal principal, Errors errors) throws Exception {
+        employeeINP.setUsername(principal.getName());
         Commons.validateFieldRequest(errors);
         log.debug("REST request to update an employee : {}", employeeINP);
         Employee employee = employeeService.updateEmployee(employeeINP);

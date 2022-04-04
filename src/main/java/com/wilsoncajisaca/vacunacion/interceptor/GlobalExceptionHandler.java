@@ -3,6 +3,7 @@ package com.wilsoncajisaca.vacunacion.interceptor;
 import com.wilsoncajisaca.vacunacion.exception.AuthException;
 import com.wilsoncajisaca.vacunacion.exception.GeneralException;
 import com.wilsoncajisaca.vacunacion.exception.RequestValidationException;
+import com.wilsoncajisaca.vacunacion.exception.TokenException;
 import com.wilsoncajisaca.vacunacion.pojos.errors.ApiError;
 import com.wilsoncajisaca.vacunacion.pojos.errors.ApiFieldError;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +57,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.debug("Exception for return handleAuthException: {}", authException);
         ApiError error = authException.getApiError();
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+    }
+
+    /**
+     * @param tokenException Throw Error
+     * @param webRequest   Request
+     * @return Final custom exception
+     */
+    @ExceptionHandler(TokenException.class)
+    public ResponseEntity<Object> handleTokenException(TokenException tokenException, WebRequest webRequest){
+        log.debug("Exception for return tokenException: {}", tokenException);
+        ApiError error = tokenException.getApiError();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
     /**

@@ -48,6 +48,7 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
         existEmployeeByIdentification(employee.getIdentification());
         Employee employeeEntity = EmployeeMapper.toEntityRegister(employee);
         Employee emp = employeeRepository.save(employeeEntity);
+        resp.put("username", emp.getIdentification());
         resp.put("password", createAuthPassword(emp));
         resp.put("employee", emp);
         return resp;
@@ -108,6 +109,11 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
         return employeeRepository.getByRangeDate(fromDate, toDate);
     }
 
+    @Override
+    public Employee getInfoByEmployee(String username) throws GeneralException {
+        return employeeRepository.findByIdentificationAndStatus(username,true).orElseThrow(this::generateErrorNotFoundEmployee);
+    }
+
     /**
      * Search and Validate employee into database for identifier
      *
@@ -157,5 +163,7 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
         return employeeRepository.findByIdAndStatus(employeeId,true)
                 .orElseThrow(this::generateErrorNotFoundEmployee);
     }
+
+
 
 }

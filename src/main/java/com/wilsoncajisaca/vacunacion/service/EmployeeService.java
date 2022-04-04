@@ -58,4 +58,6 @@ public interface EmployeeService {
     Set<Employee> getAllEmployeeByTypeVaccination(Long vaccinateType) throws GeneralException;
 
     Set<Employee> getEmployeeByVaccinateDate(Date fromDate, Date toDate) throws GeneralException;
+
+    Employee getInfoByEmployee(String username) throws GeneralException;
 }

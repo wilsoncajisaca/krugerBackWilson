@@ -25,10 +25,14 @@ import java.util.Set;
 @Setter(AccessLevel.PUBLIC)
 public class UpdateEmployeeINP implements Serializable {
 
-    @NotNull(message = "Empleado_id no puede estar nula")
     @JsonProperty("employee_id")
     @With
     private Long employeeId;
+
+    @NotEmpty(message = "No se encontro el nombre de usuario")
+    @JsonProperty("username")
+    @With
+    private String username;
 
     @Temporal(TemporalType.DATE)
     @NotNull(message = "Fecha Nacimiento no puede ser nulo")

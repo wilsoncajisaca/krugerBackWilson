@@ -7,6 +7,7 @@ import com.wilsoncajisaca.vacunacion.exception.GeneralException;
 import com.wilsoncajisaca.vacunacion.pojos.AuthINP;
 import com.wilsoncajisaca.vacunacion.pojos.errors.ApiError;
 import com.wilsoncajisaca.vacunacion.repositories.AuthRepository;
+import com.wilsoncajisaca.vacunacion.security.JwtTokenProvider;
 import com.wilsoncajisaca.vacunacion.service.AuthService;
 import com.wilsoncajisaca.vacunacion.service.tools.Tools;
 import lombok.extern.slf4j.Slf4j;
@@ -35,11 +36,18 @@ public class AuthServiceImpl extends Tools implements AuthService {
     @Autowired
     private AuthRepository authRepository;
 
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
     @Override
     public Map<String,Object> autenticate(AuthINP auth) throws Exception {
         SecurityContextHolder.getContext().setAuthentication(this.authenticateUser(auth));
+
+        //obtenemos el token del jwtTokenProvider
+        String token = jwtTokenProvider.generateToken(auth.getUsername(), 1200);
+
         Map<String,Object> res = new LinkedHashMap<>();
-        res.put("response", "Iniciaste Sesion con exito.");
+        res.put("token", token);
         return res;
     }
 

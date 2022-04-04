@@ -77,7 +77,6 @@ public class Employee extends Audit implements Serializable {
     @With
     private Boolean status;
 
-    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee")
     private Set<Address> addresses = new HashSet<>();
 
@@ -85,7 +84,6 @@ public class Employee extends Audit implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee")
     private Set<Auth> auths = new HashSet<>();
 
-    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee")
     private Set<MobilePhone> mobilePhones = new HashSet<>();
 
