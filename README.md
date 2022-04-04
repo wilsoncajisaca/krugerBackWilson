@@ -15,6 +15,7 @@ username = 0123456789
 password = 12345
 
 Los usuarios de tipo empleado solo se crean atraves de la aplicacion.
+
 Los credenciales de los mismo se devuelven en formato json en los campos:
 username y password
 
