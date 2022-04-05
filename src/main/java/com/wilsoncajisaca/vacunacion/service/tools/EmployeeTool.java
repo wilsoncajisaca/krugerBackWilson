@@ -62,7 +62,6 @@ public class EmployeeTool extends Tools {
      * @return New Address list
      */
     protected Set<Address> createEmployeeAddress(Employee employee, UpdateEmployeeINP employeeINP) {
-
         Set<Address> addresses = new HashSet<>();
 
         if(employeeINP.getAddresses() != null){

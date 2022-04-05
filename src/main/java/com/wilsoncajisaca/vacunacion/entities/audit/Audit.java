@@ -1,5 +1,6 @@
 package com.wilsoncajisaca.vacunacion.entities.audit;
 
+import com.wilsoncajisaca.vacunacion.security.UserInfoAuthentication;
 import lombok.*;
 import lombok.experimental.Tolerate;
 
@@ -8,7 +9,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @MappedSuperclass
@@ -31,13 +31,13 @@ public class Audit implements Serializable {
     @PrePersist
     public void prePersist() {
         createdOn = new Date();
-        createdBy = "xxx";// LoggedUser.get();
+        createdBy = UserInfoAuthentication.getUsername();
     }
 
     @PreUpdate
     public void preUpdate() {
         updatedOn = new Date();
-        updatedBy = "yyy"; //LoggedUser.get();
+        updatedBy = UserInfoAuthentication.getUsername();
     }
 
     @Tolerate
