@@ -1,6 +1,7 @@
 package com.wilsoncajisaca.vacunacion.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.Tolerate;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
 /**
  * @author wilson.cajisaca
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "mobile_phone")
 @Builder

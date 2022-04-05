@@ -59,5 +59,5 @@ public interface EmployeeService {
 
     Set<Employee> getEmployeeByVaccinateDate(Date fromDate, Date toDate) throws GeneralException;
 
-    Employee getInfoByEmployee(String username) throws GeneralException;
+    Employee getInfoByEmployee() throws GeneralException;
 }

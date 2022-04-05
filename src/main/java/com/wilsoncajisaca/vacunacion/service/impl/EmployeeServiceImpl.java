@@ -13,6 +13,7 @@ import com.wilsoncajisaca.vacunacion.pojos.UpdateEmployeeINP;
 import com.wilsoncajisaca.vacunacion.repositories.AuthRepository;
 import com.wilsoncajisaca.vacunacion.repositories.EmployeeRepository;
 import com.wilsoncajisaca.vacunacion.repositories.RolesRepository;
+import com.wilsoncajisaca.vacunacion.security.UserInfoAuthentication;
 import com.wilsoncajisaca.vacunacion.service.EmployeeService;
 import com.wilsoncajisaca.vacunacion.service.tools.EmployeeTool;
 import lombok.extern.slf4j.Slf4j;
@@ -110,8 +111,9 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
     }
 
     @Override
-    public Employee getInfoByEmployee(String username) throws GeneralException {
-        return employeeRepository.findByIdentificationAndStatus(username,true).orElseThrow(this::generateErrorNotFoundEmployee);
+    public Employee getInfoByEmployee() throws GeneralException {
+        return employeeRepository.findByIdentificationAndStatus(UserInfoAuthentication.getUsername(),true)
+                .orElseThrow(this::generateErrorNotFoundEmployee);
     }
 
     /**

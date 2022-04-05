@@ -1,6 +1,7 @@
 package com.wilsoncajisaca.vacunacion.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.wilsoncajisaca.vacunacion.entities.audit.Audit;
 import lombok.*;
 import lombok.experimental.Tolerate;
@@ -15,6 +16,7 @@ import java.util.Set;
 /**
  * @author wilson.cajisaca
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "auth_employee", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"}) })
 @Builder
