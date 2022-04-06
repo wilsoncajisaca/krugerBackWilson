@@ -1,7 +1,7 @@
-#logging:
-#  level:
+logging:
+  level:
 #    ROOT: DEBUG
-#    org.hibernate.SQL: DEBUG
+    org.hibernate.SQL: DEBUG
 
 spring:
   devtools:
@@ -27,7 +27,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     hibernate:
       show-sql: true
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
