@@ -8,6 +8,7 @@ Ir al directorio EXTRAS y correr los scripts.
 # -------------------- Levantar el servicio back --------------------
 
 #Nota:
+
 #Ejecutar los pasos 3, 4, 5 SOLO SI el sistema a la hora de levantar el proyecto no ejecutó las inserciones en la base.
 (Verificar en la base -> Tabla employee)
 
