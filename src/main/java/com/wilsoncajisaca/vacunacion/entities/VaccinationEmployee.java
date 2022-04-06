@@ -24,12 +24,11 @@ import java.util.UUID;
 @Builder
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
-
 //TODO: UNA PERSONA PUEDE TENER PUESTA VARIAS VACUNAS DE DIFERENTES TIPOS
 public class VaccinationEmployee implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

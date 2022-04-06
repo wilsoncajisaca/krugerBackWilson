@@ -24,7 +24,7 @@ import java.util.Set;
 @Setter(AccessLevel.PUBLIC)
 public class Auth extends Audit implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -55,7 +55,7 @@ public class Auth extends Audit implements Serializable {
     @With
     private Boolean status;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "auth_role",
             joinColumns = @JoinColumn(name = "auth_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id"))

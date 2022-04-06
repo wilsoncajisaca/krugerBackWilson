@@ -11,6 +11,7 @@ import com.wilsoncajisaca.vacunacion.security.UserInfoAuthentication;
 import com.wilsoncajisaca.vacunacion.service.EmployeeService;
 import com.wilsoncajisaca.vacunacion.utils.Validations;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -28,6 +29,7 @@ import java.util.Set;
 @Slf4j
 @RestController
 @RequestMapping("/api/employee/")
+@SecurityRequirement(name = "Token")
 public class EmployeeController {
 
     @Autowired
