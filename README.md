@@ -17,7 +17,7 @@ Ejecutar los pasos 3, 4 y 5 solo si el sistema a la hora de levantar el proyecto
 # ----------------------------------------------------------------------
 
 # Nota: 
-*Cuando intente crear un nuevo empleado, el PRIMER INTENTO devolvera error, esto debido al incrementable "id" de la tabla "employee" ya que se en el paso 4 anterior se inserta directamente/manualmente en la base.)*
+*Cuando intente crear un nuevo empleado, el PRIMER INTENTO devolvera error, esto debido al incrementable "id" de la tabla "employee" ya que en el anterior paso 4 r se inserta directamente/manualmente en la base.)*
 
 ----------------------------------------------------------------------
 
