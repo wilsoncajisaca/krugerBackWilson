@@ -7,14 +7,15 @@ Ir al directorio EXTRAS y correr los scripts.
 
 # -------------------- Levantar el servicio back --------------------
 
-#Nota:
-
-#Ejecutar los pasos 3, 4, 5 SOLO SI el sistema a la hora de levantar el proyecto no ejecutó las inserciones en la base.
+# Nota:
+Ejecutar los pasos 3, 4 y 5 solo si el sistema a la hora de levantar el proyecto no ejecutó las inserciones en la base.
 (Verificar en la base -> Tabla employee)
 
 3. Inserta los roles directamente con los scripts
 4. Insertar el usuario admin de pruebas (Nota: Cuando cree un nuevo empleado el PRIMER INTENTO devolvera error, esto debido al incrementable "id" ya que se inserta directamente en la base)
 5. Ingresar el rol con el usuario
+
+# ----------------------------------------------------------------------
 
 En el directorio EXTRAS tambien encontrará adjunto el modelado de la base.
 
