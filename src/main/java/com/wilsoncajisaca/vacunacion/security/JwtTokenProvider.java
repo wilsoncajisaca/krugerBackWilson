@@ -33,7 +33,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String obtenerUsernameDelJWT(String token) {
+    public String getUsernameOfToken(String token) {
         Claims claims = Jwts.parser().setSigningKey(constants.getSIGNING_KEY()).parseClaimsJws(token).getBody();
         return claims.getSubject();
     }

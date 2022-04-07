@@ -28,7 +28,6 @@ public class Auth extends Audit implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotNull
     @Column(name = "id_employee")
     @With
     private Long idEmployee;

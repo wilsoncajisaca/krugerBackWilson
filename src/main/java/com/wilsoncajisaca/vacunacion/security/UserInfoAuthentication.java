@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Slf4j
 public class UserInfoAuthentication {
-    //Obtiene el username de la persona logeada
+    //get the username of the person logged in
     public static String getUsername (){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
