@@ -14,11 +14,6 @@ Ejecutar los pasos 3, 4 y 5 solo si el sistema a la hora de levantar el proyecto
 4. Insertar el usuario admin de pruebas 
 5. Ingresar el rol con el usuario
 
-# ----------------------------------------------------------------------
-
-# Nota: 
-*Cuando intente crear un nuevo empleado, el PRIMER INTENTO devolvera error, esto debido al incrementable "id" de la tabla "employee" ya que en el anterior paso 4 r se inserta directamente/manualmente en la base.)*
-
 ----------------------------------------------------------------------
 
 En el directorio EXTRAS tambien encontrará adjunto el modelado de la base.
