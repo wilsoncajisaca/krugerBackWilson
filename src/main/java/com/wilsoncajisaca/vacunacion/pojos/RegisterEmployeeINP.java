@@ -7,6 +7,7 @@ import lombok.experimental.Tolerate;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Data for save a employee
@@ -18,7 +19,7 @@ public class RegisterEmployeeINP implements Serializable {
 
     @JsonProperty("id")
     @With
-    private Long id;
+    private UUID id;
 
     @Size(min = 10,max = 10, message = "La cedula debe contener 10 caracteres")
     @NotNull(message = "La cedula no puede estar vacio")

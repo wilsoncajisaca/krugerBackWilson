@@ -80,7 +80,7 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
 
     @Override
     @Transactional
-    public Map<String, Object> deleteEmployee(Long employeeId) throws GeneralException {
+    public Map<String, Object> deleteEmployee(UUID employeeId) throws GeneralException {
         Map<String,Object> response = new LinkedHashMap<>();
         getEmployeeById(employeeId);
         employeeRepository.deleteById(employeeId);
@@ -101,7 +101,7 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
     }
 
     @Override
-    public Set<Employee> getAllEmployeeByTypeVaccination(Long vaccinateType) throws GeneralException {
+    public Set<Employee> getAllEmployeeByTypeVaccination(UUID vaccinateType) throws GeneralException {
         return employeeRepository.getByVaccinateType(vaccinateType);
     }
 
@@ -161,7 +161,7 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
         return employee;
     }
 
-    private Employee getEmployeeById(Long employeeId){
+    private Employee getEmployeeById(UUID employeeId){
         return employeeRepository.findByIdAndStatus(employeeId,true)
                 .orElseThrow(this::generateErrorNotFoundEmployee);
     }

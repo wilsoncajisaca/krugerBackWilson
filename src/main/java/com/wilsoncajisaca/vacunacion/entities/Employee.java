@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.With;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -22,6 +23,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author wilson.cajisaca
@@ -35,11 +37,13 @@ import java.util.Set;
 @Table(name = "employee")
 //TODO: SE CREA LA TABLA VACCINATION_EMPLOYEE PORQUE UNA PERSONA PUEDE ESTAR VACUNADO CON DIFERENTES TIPOS DE VACUNAS
 public class Employee extends Audit implements Serializable {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "pk_employee",
+            strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @Column(name = "identification", length = 10, nullable = false, unique = true)
     @With

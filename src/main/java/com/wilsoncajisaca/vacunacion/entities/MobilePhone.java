@@ -4,31 +4,37 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * @author wilson.cajisaca
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Entity
-@Table(name = "mobile_phone")
 @Builder
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
+@Entity
+@Table(name = "mobile_phone")
 public class MobilePhone implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "pk_mobile_phone",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @NotNull
     @Column(name = "id_employee")
     @With
-    private Long idEmployee;
+    private UUID idEmployee;
     @JsonIgnore
     @JoinColumn(name = "id_employee",
             referencedColumnName = "id",

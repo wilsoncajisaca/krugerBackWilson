@@ -8,14 +8,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
+
 /**
  * Spring data repository for the {@link com.wilsoncajisaca.vacunacion.entities.Employee} entity
  */
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Serializable> {
 
     /**
      * Get employee by identification
@@ -31,7 +34,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
      * @param id Owner Employee id
      * @return Employee
      */
-    Optional<Employee> findByIdAndStatus(Long id, Boolean status);
+    Optional<Employee> findByIdAndStatus(UUID id, Boolean status);
 
     /**
      * Get Employee by id
@@ -44,7 +47,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query("SELECT ve.employee FROM VaccinationEmployee ve" +
             "   WHERE ve.idVaccinationType = :VACCINATE_ID")
-    Set<Employee> getByVaccinateType(@Param("VACCINATE_ID") Long vaccinateId);
+    Set<Employee> getByVaccinateType(@Param("VACCINATE_ID") UUID vaccinateId);
 
     @Query("SELECT ve.employee FROM VaccinationEmployee ve" +
             "   WHERE ve.vaccinationDate BETWEEN :FROM_DATE AND :TO_DATE")

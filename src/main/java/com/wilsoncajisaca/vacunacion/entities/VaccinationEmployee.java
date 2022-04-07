@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,14 +29,18 @@ import java.util.UUID;
 public class VaccinationEmployee implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "pk_vaccination_employee",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @NotNull
     @Column(name = "id_employee")
     @With
-    private Long idEmployee;
+    private UUID idEmployee;
     @JsonIgnore
     @JoinColumn(name = "id_employee",
             referencedColumnName = "id",
@@ -47,7 +52,7 @@ public class VaccinationEmployee implements Serializable {
     @NotNull
     @Column(name = "id_vaccination_type")
     @With
-    private Long idVaccinationType;
+    private UUID idVaccinationType;
     @JsonIgnore
     @JoinColumn(name = "id_vaccination_type",
             referencedColumnName = "id",

@@ -8,6 +8,7 @@ import com.wilsoncajisaca.vacunacion.pojos.UpdateEmployeeINP;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Service interface for managing
@@ -42,7 +43,7 @@ public interface EmployeeService {
      * @param employeeId id for delete an entity
      * @return a information map
      */
-    Map<String,Object> deleteEmployee(Long employeeId) throws GeneralException;
+    Map<String,Object> deleteEmployee(UUID employeeId) throws GeneralException;
 
 
     /**
@@ -55,7 +56,7 @@ public interface EmployeeService {
 
     Set<Employee> getAllEmployeeByStatusVaccination(Boolean statusVaccinated) throws GeneralException;
 
-    Set<Employee> getAllEmployeeByTypeVaccination(Long vaccinateType) throws GeneralException;
+    Set<Employee> getAllEmployeeByTypeVaccination(UUID vaccinateType) throws GeneralException;
 
     Set<Employee> getEmployeeByVaccinateDate(Date fromDate, Date toDate) throws GeneralException;
 
