@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * @author wilson.cajisaca
@@ -21,14 +23,18 @@ import java.io.Serializable;
 @Setter(AccessLevel.PUBLIC)
 public class Address implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "pk_address",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @NotNull
     @Column(name = "id_employee")
     @With
-    private Long idEmployee;
+    private UUID idEmployee;
     @JsonIgnore
     @JoinColumn(name = "id_employee",
             referencedColumnName = "id",

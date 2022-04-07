@@ -21,10 +21,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -98,7 +95,7 @@ public class EmployeeController {
     @Operation(summary = "Elimina un empleado por su id")
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> deleteEmployee(@RequestParam("employee") Long employeeId) throws Exception {
+    public ResponseEntity<Object> deleteEmployee(@RequestParam("employee") UUID employeeId) throws Exception {
         log.debug("REST request to list all employee");
         if(employeeId == null || employeeId.toString().isEmpty()){
             throw new GeneralException(new ApiError("No se encontro el id del empleado"));
@@ -144,7 +141,7 @@ public class EmployeeController {
     @Operation(summary = "Obtiene la lista de empleados por su tipo de vacuna")
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "get-employee-type-vaccinate", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getEmployeeByVaccinate(@RequestParam("tipo_vacuna") Long vaccinationType) throws Exception {
+    public ResponseEntity<Object> getEmployeeByVaccinate(@RequestParam("tipo_vacuna") UUID vaccinationType) throws Exception {
         log.debug("REST request to list All by status");
         Set<Employee> employees = employeeService.getAllEmployeeByTypeVaccination(vaccinationType);
         return ResponseEntity.ok().body(employees);

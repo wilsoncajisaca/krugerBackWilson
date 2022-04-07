@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Data for update a auth
@@ -17,10 +18,10 @@ import java.io.Serializable;
 public class AuthINP implements Serializable {
 
     @With
-    private Long id;
+    private UUID id;
 
     @With
-    private Long idEmployee;
+    private UUID idEmployee;
 
     @NotEmpty(message = "No se encontro el usuario")
     @Size(min = 3, max = 150)

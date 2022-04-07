@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Data for update a employee
@@ -27,7 +28,7 @@ public class UpdateEmployeeINP implements Serializable {
 
     @JsonProperty("employee_id")
     @With
-    private Long employeeId;
+    private UUID employeeId;
 
     @With
     private String username;
@@ -66,11 +67,11 @@ public class UpdateEmployeeINP implements Serializable {
 
         @JsonProperty("address_id")
         @With
-        private Long addressId;
+        private UUID addressId;
 
         @JsonProperty("empleado_id")
         @With
-        private Long employee;
+        private UUID employee;
 
         @JsonProperty("calle_principal")
         @With
@@ -103,11 +104,11 @@ public class UpdateEmployeeINP implements Serializable {
 
         @JsonProperty("phone_id")
         @With
-        Long phoneId;
+        UUID phoneId;
 
         @JsonProperty("empleado_id")
         @With
-        private Long employee;
+        private UUID employee;
 
         @Size(min = 7, max = 25, message = "El numero celular debe contener al menos 7 dijitos y maximo 25")
         @JsonProperty("numero_celular")
@@ -132,15 +133,15 @@ public class UpdateEmployeeINP implements Serializable {
 
         @JsonProperty("vaccination_id")
         @With
-        Long vaccinationId;
+        UUID vaccinationId;
 
         @JsonProperty("empleado_id")
         @With
-        private Long employee;
+        private UUID employee;
 
         @JsonProperty("tipo_vacuna_id")
         @With
-        private Long vaccineType;
+        private UUID vaccineType;
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Validations.DATE_FORMAT)
         @JsonProperty("fecha_vacuna")

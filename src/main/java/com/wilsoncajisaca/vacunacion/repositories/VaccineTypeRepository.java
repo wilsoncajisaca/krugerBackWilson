@@ -4,11 +4,11 @@ import com.wilsoncajisaca.vacunacion.entities.VaccinationType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface VaccineTypeRepository extends JpaRepository<VaccinationType, Long> {
-
-    Optional<VaccinationType> findById(Long id);
-
+public interface VaccineTypeRepository extends JpaRepository<VaccinationType, Serializable> {
+    Optional<VaccinationType> findById(UUID id);
 }
