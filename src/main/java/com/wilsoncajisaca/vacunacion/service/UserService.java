@@ -5,7 +5,6 @@ import com.wilsoncajisaca.vacunacion.entities.Role;
 import com.wilsoncajisaca.vacunacion.exception.GeneralException;
 import com.wilsoncajisaca.vacunacion.pojos.errors.ApiError;
 import com.wilsoncajisaca.vacunacion.repositories.AuthRepository;
-import com.wilsoncajisaca.vacunacion.repositories.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

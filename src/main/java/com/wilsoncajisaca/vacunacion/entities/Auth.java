@@ -34,7 +34,6 @@ public class Auth extends Audit implements Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @NotNull
     @Column(name = "id_employee")
     @With
     private UUID idEmployee;

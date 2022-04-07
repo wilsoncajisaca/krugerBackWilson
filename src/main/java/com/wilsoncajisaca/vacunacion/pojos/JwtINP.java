@@ -15,17 +15,17 @@ import java.io.Serializable;
 @Setter(AccessLevel.PUBLIC)
 public class JwtINP implements Serializable {
 
-    private String tokenDeAcceso;
-    private String tipoDeToken = "Bearer";
+    private String accessToken;
+    private String tokenType = "Bearer";
 
     public JwtINP(String tokenDeAcceso) {
         super();
-        this.tokenDeAcceso = tokenDeAcceso;
+        this.accessToken = tokenDeAcceso;
     }
 
-    public JwtINP(String tokenDeAcceso, String tipoDeToken) {
+    public JwtINP(String accessToken, String tokenType) {
         super();
-        this.tokenDeAcceso = tokenDeAcceso;
-        this.tipoDeToken = tipoDeToken;
+        this.accessToken = accessToken;
+        this.tokenType = tokenType;
     }
 }

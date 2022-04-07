@@ -1,18 +1,13 @@
 package com.wilsoncajisaca.vacunacion.service.impl;
 
 import com.wilsoncajisaca.vacunacion.commons.Commons;
-import com.wilsoncajisaca.vacunacion.entities.Auth;
 import com.wilsoncajisaca.vacunacion.entities.Employee;
-import com.wilsoncajisaca.vacunacion.entities.Role;
 import com.wilsoncajisaca.vacunacion.entities.enums.VaccinationStatus;
 import com.wilsoncajisaca.vacunacion.exception.GeneralException;
-import com.wilsoncajisaca.vacunacion.mappers.AuthMapper;
 import com.wilsoncajisaca.vacunacion.mappers.EmployeeMapper;
 import com.wilsoncajisaca.vacunacion.pojos.RegisterEmployeeINP;
 import com.wilsoncajisaca.vacunacion.pojos.UpdateEmployeeINP;
-import com.wilsoncajisaca.vacunacion.repositories.AuthRepository;
 import com.wilsoncajisaca.vacunacion.repositories.EmployeeRepository;
-import com.wilsoncajisaca.vacunacion.repositories.RolesRepository;
 import com.wilsoncajisaca.vacunacion.security.UserInfoAuthentication;
 import com.wilsoncajisaca.vacunacion.service.EmployeeService;
 import com.wilsoncajisaca.vacunacion.service.tools.EmployeeTool;
@@ -34,34 +29,23 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
-    private AuthRepository authRepository;
-    @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private RolesRepository rolesRepository;
 
     @Override
     @Transactional
     public Map<String, Object> createEmployee(RegisterEmployeeINP employee) throws GeneralException {
         log.debug("Service to save an employee : {}", employee);
         Map<String,Object> resp = new LinkedHashMap<>();
+        String password = createAuthPassword();
         Commons.validateIdentifier(employee.getIdentification());
         existEmployeeByIdentification(employee.getIdentification());
         Employee employeeEntity = EmployeeMapper.toEntityRegister(employee);
+        employeeEntity.setAuths(createAuthForEmployee(employeeEntity, passwordEncoder.encode(password)));
         Employee emp = employeeRepository.save(employeeEntity);
-        resp.put("username", emp.getIdentification());
-        resp.put("password", createAuthPassword(emp));
+        resp.put("username", employee.getIdentification());
+        resp.put("password", password);
         resp.put("employee", emp);
         return resp;
-    }
-
-    private String createAuthPassword(Employee employee){
-        String password = Commons.createAleatoryPassword();
-        Auth auth = AuthMapper.toEntity(employee.getId(), employee.getIdentification(), passwordEncoder.encode(password));
-        Role role = rolesRepository.findByName("ROLE_USER").orElseThrow(this::generateErrorNotFoundRole);
-        auth.setRoles(Collections.singleton(role));
-        authRepository.save(auth);
-        return password;
     }
 
     @Override
@@ -157,7 +141,6 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
         if(employeeINP.getVaccinationStatus()){
             employee.setVaccinationEmployees(createEmployeeVaccination(employee, employeeINP));
         }
-
         return employee;
     }
 
@@ -170,5 +153,7 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
         return employeeRepository.findByIdentificationAndStatus(identifier,true)
                 .orElseThrow(this::generateErrorNotFoundEmployee);
     }
-
+    private String createAuthPassword(){
+        return Commons.createAleatoryPassword();
+    }
 }

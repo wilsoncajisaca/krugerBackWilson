@@ -1,13 +1,17 @@
 package com.wilsoncajisaca.vacunacion.service.tools;
 
+import com.wilsoncajisaca.vacunacion.commons.Commons;
 import com.wilsoncajisaca.vacunacion.entities.*;
+import com.wilsoncajisaca.vacunacion.mappers.AuthMapper;
 import com.wilsoncajisaca.vacunacion.mappers.EmployeeAddressMapper;
 import com.wilsoncajisaca.vacunacion.mappers.EmployeePhoneMapper;
 import com.wilsoncajisaca.vacunacion.mappers.EmployeeVaccinationMapper;
 import com.wilsoncajisaca.vacunacion.pojos.UpdateEmployeeINP;
 import com.wilsoncajisaca.vacunacion.repositories.PhoneRepository;
+import com.wilsoncajisaca.vacunacion.repositories.RolesRepository;
 import com.wilsoncajisaca.vacunacion.repositories.VaccineTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,12 +22,13 @@ import java.util.stream.Collectors;
  */
 @Service
 public class EmployeeTool extends Tools {
-
+    private final String ROL_EMPLOYEE = "ROLE_USER";
     @Autowired
     private PhoneRepository phoneRepository;
-
     @Autowired
     private VaccineTypeRepository vaccineTypeRepository;
+    @Autowired
+    private RolesRepository rolesRepository;
 
     /**
      * Generate and validate data Employee phone to save
@@ -115,6 +120,15 @@ public class EmployeeTool extends Tools {
         }
 
         return vaccination;
+    }
+
+    protected Set<Auth> createAuthForEmployee(Employee employee, String password) {
+        Auth auth = AuthMapper.toEntity(employee.getId(), employee.getIdentification(), password);
+        Role role = rolesRepository.findByName(ROL_EMPLOYEE).orElseThrow(this::generateErrorNotFoundRole);
+        auth.setRoles(Collections.singleton(role));
+        Set<Auth> auths = new HashSet<>();
+        auths.add(auth);
+        return auths;
     }
 
     private void getVaccineById(Set<VaccinationEmployee> vaccinations){
