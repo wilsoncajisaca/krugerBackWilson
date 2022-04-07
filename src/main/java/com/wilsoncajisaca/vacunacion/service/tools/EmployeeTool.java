@@ -122,7 +122,7 @@ public class EmployeeTool extends Tools {
         return vaccination;
     }
 
-    protected Set<Auth> createAuthForEmployee(Employee employee, String password) {
+    protected Set<Auth> createAuth(Employee employee, String password) {
         Auth auth = AuthMapper.toEntity(employee.getId(), employee.getIdentification(), password);
         Role role = rolesRepository.findByName(ROL_EMPLOYEE).orElseThrow(this::generateErrorNotFoundRole);
         auth.setRoles(Collections.singleton(role));

@@ -149,6 +149,7 @@ public class UpdateEmployeeINP implements Serializable {
         private Date vaccinationDate;
 
         @JsonProperty("numero_dosis")
+        @NotNull(message = "numero_dosis no puede estar vacio")
         @With
         private Integer numberDoses;
 

@@ -40,8 +40,8 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
         Commons.validateIdentifier(employee.getIdentification());
         existEmployeeByIdentification(employee.getIdentification());
         Employee employeeEntity = EmployeeMapper.toEntityRegister(employee);
-        employeeEntity.setAuths(createAuthForEmployee(employeeEntity, passwordEncoder.encode(password)));
         Employee emp = employeeRepository.save(employeeEntity);
+        createAuthForEmployee(emp, passwordEncoder.encode(password));
         resp.put("username", employee.getIdentification());
         resp.put("password", password);
         resp.put("employee", emp);
@@ -144,6 +144,11 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
         return employee;
     }
 
+    private void createAuthForEmployee(Employee employee, String password){
+        employee.setAuths(createAuth(employee, password));
+        employeeRepository.save(employee);
+    }
+
     private Employee getEmployeeById(UUID employeeId){
         return employeeRepository.findByIdAndStatus(employeeId,true)
                 .orElseThrow(this::generateErrorNotFoundEmployee);
@@ -153,6 +158,7 @@ public class EmployeeServiceImpl extends EmployeeTool implements EmployeeService
         return employeeRepository.findByIdentificationAndStatus(identifier,true)
                 .orElseThrow(this::generateErrorNotFoundEmployee);
     }
+
     private String createAuthPassword(){
         return Commons.createAleatoryPassword();
     }

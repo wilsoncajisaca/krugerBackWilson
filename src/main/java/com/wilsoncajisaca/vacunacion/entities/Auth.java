@@ -39,6 +39,7 @@ public class Auth extends Audit implements Serializable {
     private UUID idEmployee;
     @JsonIgnore
     @JoinColumn(name = "id_employee",
+            nullable = false,
             referencedColumnName = "id",
             insertable = false, updatable = false,
             foreignKey = @ForeignKey(name = "fk_employee"))
