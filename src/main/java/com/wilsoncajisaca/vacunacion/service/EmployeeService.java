@@ -53,11 +53,35 @@ public interface EmployeeService {
      */
     Employee updateEmployee(UpdateEmployeeINP employee) throws GeneralException, Exception;
 
+    /**
+     * Get all employees by status vaccination
+     *
+     * @param statusVaccinated
+     * @return the Set of Employee entity
+     */
     Set<Employee> getAllEmployeeByStatusVaccination(Boolean statusVaccinated) throws GeneralException;
 
+    /**
+     * Get all employees by vaccination Type
+     *
+     * @param vaccinateType
+     * @return the Set of Employee entity
+     */
     Set<Employee> getAllEmployeeByTypeVaccination(Long vaccinateType) throws GeneralException;
 
+    /**
+     * Get all employees by vaccination date
+     *
+     * @param fromDate
+     * @param toDate
+     * @return the Set of Employee entity
+     */
     Set<Employee> getEmployeeByVaccinateDate(Date fromDate, Date toDate) throws GeneralException;
 
+    /**
+     * Get employee by username
+     *
+     * @return the Employee entity
+     */
     Employee getInfoByEmployee() throws GeneralException;
 }
