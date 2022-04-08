@@ -1,5 +1,4 @@
 -- Database: kruger-db
-
 -- DROP DATABASE IF EXISTS "kruger-db";
 
 CREATE DATABASE "kruger-db"
@@ -10,7 +9,6 @@ CREATE DATABASE "kruger-db"
     LC_CTYPE = 'Spanish_Spain.1252'
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
-
 
 -- Role: kruger
 -- DROP ROLE IF EXISTS kruger;
